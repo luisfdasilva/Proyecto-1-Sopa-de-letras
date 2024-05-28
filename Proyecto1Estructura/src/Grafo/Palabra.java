@@ -13,7 +13,7 @@ public class Palabra {
             ;
     private int id;
     private String texto;
-    private Posicion[] posiciones;
+    private String[] posiciones;
     
 public enum Direccion{
     HORIZONTAL,
@@ -21,7 +21,7 @@ public enum Direccion{
     DIAGONAL
 }
 
-    public Palabra(int id, String texto, Posicion[] posiciones, Direccion direccion) {
+    public Palabra(int id, String texto, String[] posiciones, Direccion direccion) {
         this.id = id;
         this.texto = texto;
         this.posiciones = posiciones;

@@ -10,11 +10,11 @@ import Grafo.Palabra;
  */
 public class ListaG {
     private NodoG head;
-    private Integer Lenght;
+    private Integer Length;
 
-    public ListaG(NodoG head, Integer Lenght) {
+    public ListaG(NodoG head, Integer Length) {
         this.head = null;
-        this.Lenght = 0;
+        this.Length = 0;
     }
 
     public NodoG getHead() {
@@ -25,15 +25,15 @@ public class ListaG {
         this.head = head;
     }
 
-    public Integer getLenght() {
-        return Lenght;
+    public Integer getLength() {
+        return Length;
     }
 
-    public void setLenght(Integer Lenght) {
-        this.Lenght = Lenght;
+    public void setLength(Integer newLength) {
+        this.Length = newLength;
     }
-    public void insertBegin(Usuario usuario) {
-        NodoG nodoG =new NodoG(usuario);
+    public void insertBegin(Palabra palabra, Nodo head, Lista adyacentes) {
+        NodoG nodoG =new NodoG(palabra, head, adyacentes);
         if (isEmpty()){
         setHead(nodoG);
         }
@@ -41,11 +41,11 @@ public class ListaG {
         nodoG.setNext(getHead());
         setHead(nodoG);
         }
-        length++;
+        this.setLength(this.getLength()+1);
     }
 
-    public void insertFinal(Usuario usuario) {
-        NodoG nodoG =new NodoG(usuario);
+    public void insertFinal(Palabra palabra, Nodo head, Lista adyacentes) {
+        NodoG nodoG =new NodoG(palabra, head, adyacentes);
         if (isEmpty()){
             setHead(nodoG);
         }
@@ -56,17 +56,17 @@ public class ListaG {
             }
             pointer.setNext(nodoG);
         }
-        length++;
+        this.setLength(this.getLength()+1);
     }
 
     
-    public void insertAtIndex(Usuario usuario, int index) {
-        NodoG nodoG =new NodoG(usuario);
+    public void insertAtIndex(Palabra palabra, int index, Nodo head, Lista adyacentes) {
+        NodoG nodoG =new NodoG(palabra, head, adyacentes);
         if (isEmpty() || index==0){
-        insertBegin(usuario);
+        insertBegin(palabra, head, adyacentes);
         }
         else {
-            if (index<length){
+            if (index<this.getLength()){
                 NodoG pointer=getHead();
                 int cont=0;
                 while (cont<index-1){
@@ -75,10 +75,10 @@ public class ListaG {
                 }
                 nodoG.setNext(pointer.getNext());
                 pointer.setNext(nodoG);
-                length++;
+                this.setLength(this.getLength()+1);
             } 
-            else if (index==length){
-                insertFinal(usuario);
+            else if (index==this.getLength()){
+                insertFinal(palabra, head, adyacentes);
             } 
             else {
                 System.out.println("Index not valid");
@@ -96,7 +96,7 @@ public class ListaG {
             NodoG temp=getHead();
             setHead(temp.getNext());
             temp.setNext(null);
-            length--;
+            this.setLength(this.getLength()-1);
             return temp;
         }
     }
@@ -115,7 +115,7 @@ public class ListaG {
             }
             NodoG temp=pointer.getNext();
             pointer.setNext(null);
-            length--;
+            this.setLength(this.getLength()-1);
             return temp;
         }
     }
@@ -141,7 +141,7 @@ public class ListaG {
                     NodoG temp=pointer.getNext();
                     pointer.setNext(temp.getNext());
                     temp.setNext(null);
-                    length--;
+                    this.setLength(this.getLength()-1);
                     return temp;    
                 }
                 else{
@@ -165,7 +165,7 @@ public class ListaG {
     public void print() {
         NodoG pointer=getHead();
         while (pointer!=null){
-            System.out.println(" ["+pointer.getPalabra().getId()+"] " );
+            System.out.println(" ["+pointer.getPalabra()+"] " );
             pointer=pointer.getNext();
         }
     }

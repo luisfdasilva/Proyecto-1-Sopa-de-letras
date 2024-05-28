@@ -12,7 +12,7 @@ public class Lista implements ILista {
     private Nodo head;
     private Integer length;
 
-    public Lista(Nodo head, Integer length) {
+    public Lista(Nodo head) {
         this.head = head;
         this.length = 0;
         

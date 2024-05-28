@@ -4,7 +4,7 @@
  */
 package EDD;
 import Grafo.Palabra;
-import EDD.ListaG;
+import EDD.Lista;
 /**
  *
  * @author luis
@@ -12,13 +12,13 @@ import EDD.ListaG;
 public class NodoG {
     private Palabra palabra;
     private NodoG next;
-    private ListaG adyacentes;
+    private Lista adyacentes;
     private Integer numeroComponente; 
 
-    public NodoG(Palabra palabra, NodoG next, ListaG adyacentes) {
+    public NodoG(Palabra palabra, Nodo head, Lista adyacentes) {
         this.palabra = palabra;
         this.next = null;
-        this.adyacentes = new ListaG();
+        this.adyacentes = new Lista(head);
     }
 
     public Palabra getPalabra() {
@@ -37,11 +37,11 @@ public class NodoG {
         this.next = next;
     }
 
-    public ListaG getAdyacentes() {
+    public Lista getAdyacentes() {
         return adyacentes;
     }
 
-    public void setAdyacentes(ListaG adyacentes) {
+    public void setAdyacentes(Lista adyacentes) {
         this.adyacentes = adyacentes;
     }
 
@@ -55,12 +55,12 @@ public class NodoG {
     //imprime los atributos del nodo
     public void print(){
         System.out.println("-----------------------------------");
-        System.out.println("Id: "+getPalabra().getId());
-        System.out.println("Numero: "+getPalabra().getNumero());
+        System.out.println("Id: ");
+        System.out.println("Numero: ");
         System.out.print("Relaciones: ");
-        NodoG pointer=getAdyacentes().getHead();
+        Nodo pointer=this.getAdyacentes().getHead();
         while (pointer!=null){
-            System.out.print("["+pointer.getPalabra().getId()+"]");
+            System.out.print("["+pointer.getElement()+"]");
             pointer=pointer.getNext(); 
         }
         System.out.println(" ");
