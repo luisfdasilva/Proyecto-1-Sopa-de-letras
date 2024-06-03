@@ -115,4 +115,21 @@ public class FunctionTxt {
         Guardarletra_lista(lista1, lista2, lista3, lista4, arreglo_arch, grafo);
 
     }
+        // Enumerador para definir los métodos de búsqueda disponibles
+    public enum SearchMethod {
+        DFS, // Búsqueda en profundidad
+        BFS  // Búsqueda en amplitud
+    }
+
+     // Método para buscar una palabra en el grafo usando el método de búsqueda especificado
+    public boolean buscarPalabra(String palabra, SearchMethod metodo, Grafo grafo) {
+        switch (metodo) {
+            case DFS:
+                return grafo.DFS(palabra);
+            case BFS:
+                return grafo.BFS(palabra);
+            default:
+                throw new IllegalArgumentException("Método de búsqueda no soportado");
+        }
+    }
 }
