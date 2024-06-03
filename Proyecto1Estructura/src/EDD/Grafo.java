@@ -134,5 +134,65 @@ public class Grafo {
         }
         return -1;
     }
-    
+    // Implementación de DFS para buscar una palabra en el grafo
+    public boolean DFS(String word) {
+        boolean[] visited = new boolean[numVerts];
+        MyStack stack = new MyStack();
+
+        for (int i = 0; i < numVerts; i++) {
+            if (verts[i].getLetra().equals(word)) {
+                return true;
+            }
+            if (!visited[i]) {
+                stack.apilar(verts[i]);
+                while (!stack.isEmpty()) {
+                    Vertice v = (Vertice) stack.desapilar();
+                    int vIndex = numVertice(v);
+                    if (!visited[vIndex]) {
+                        visited[vIndex] = true;
+                        if (v.getLetra().equals(word)) {
+                            return true;
+                        }
+                        for (int j = 0; j < numVerts; j++) {
+                            if (matAd[vIndex][j] != 0 && !visited[j]) {
+                                stack.apilar(verts[j]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // Implementación de BFS para buscar una palabra en el grafo
+    public boolean BFS(String word) {
+        boolean[] visited = new boolean[numVerts];
+        MyQueue queue = new MyQueue();
+
+        for (int i = 0; i < numVerts; i++) {
+            if (verts[i].getLetra().equals(word)) {
+                return true;
+            }
+            if (!visited[i]) {
+                queue.encolar(verts[i]);
+                while (!queue.isEmpty()) {
+                    Vertice v = (Vertice) queue.desencolar();
+                    int vIndex = numVertice(v);
+                    if (!visited[vIndex]) {
+                        visited[vIndex] = true;
+                        if (v.getLetra().equals(word)) {
+                            return true;
+                        }
+                        for (int j = 0; j < numVerts; j++) {
+                            if (matAd[vIndex][j] != 0 && !visited[j]) {
+                                queue.encolar(verts[j]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
