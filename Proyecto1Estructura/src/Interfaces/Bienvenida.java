@@ -35,6 +35,7 @@ public class Bienvenida extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         opc_CargarTxt = new javax.swing.JMenuItem();
+        opc_Tablero = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -82,6 +83,15 @@ public class Bienvenida extends javax.swing.JFrame {
         });
         jMenu4.add(opc_CargarTxt);
 
+        opc_Tablero.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        opc_Tablero.setText("Tablero");
+        opc_Tablero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc_TableroActionPerformed(evt);
+            }
+        });
+        jMenu4.add(opc_Tablero);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -106,10 +116,17 @@ public class Bienvenida extends javax.swing.JFrame {
 
     private void opc_CargarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc_CargarTxtActionPerformed
         // TODO add your handling code here:
-        CargarTxt ventana = new CargarTxt();
+        CargarTxt ventana = new CargarTxt ();
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_opc_CargarTxtActionPerformed
+
+    private void opc_TableroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc_TableroActionPerformed
+        // TODO add your handling code here:
+        Tablero ventana = new Tablero ();
+        ventana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_opc_TableroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,5 +173,6 @@ public class Bienvenida extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem opc_CargarTxt;
+    private javax.swing.JMenuItem opc_Tablero;
     // End of variables declaration//GEN-END:variables
 }
