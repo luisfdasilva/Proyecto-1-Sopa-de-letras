@@ -9,44 +9,30 @@ package EDD;
  * @author eliocolmenares
  */
 public class Vertice {
-     private String letra;
-    private int numVertice;
-    private boolean fueVisitado;
+     private char letra;
+     private int fila;
+     private int columna;
 
-    public String getLetra() {
+    public Vertice(char letra, int fila, int columna) {
+        this.letra = letra;
+        this.fila = fila;
+        this.columna = columna;
+    }
+
+    public char getLetra() {
         return letra;
     }
 
-    public void setLetra(String letra) {
-        this.letra = letra;
+    public int getFila() {
+        return fila;
     }
 
-    public int getNumVertice() {
-        return numVertice;
+    public int getColumna() {
+        return columna;
     }
 
-    public void setNumVertice(int numVertice) {
-        this.numVertice = numVertice;
-    }
-
-    public boolean isFueVisitado() {
-        return fueVisitado;
-    }
-
-    public void setFueVisitado(boolean fueVisitado) {
-        this.fueVisitado = fueVisitado;
-    }
-
-    public Vertice(String letra, int numVertice) {
-        this.letra = letra;
-        this.numVertice = numVertice;
-        this.fueVisitado = false;
-    }
-    
-    public Vertice(String letra) {
-        this.letra = letra;
-        this.numVertice = -1;
-        this.fueVisitado = false;
-    }
-
+    @Override
+    public String toString() {
+        return Character.toString(letra);
+    }    
 }

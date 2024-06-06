@@ -9,190 +9,83 @@ package EDD;
  * @author eliocolmenares
  */
 public class Grafo {
-    private int numVerts;
-    private int MaxVerts;
-    private Vertice [] verts;
-    private int [][] matAd;
+    private Vertice[][] tablero;
+    private boolean[][] adyacencia;
+    private final int TAMANIO = 4;
 
-    public Grafo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Grafo(char[][] letras) {
+        tablero = new Vertice[TAMANIO][TAMANIO];
+        adyacencia = new boolean[TAMANIO * TAMANIO][TAMANIO * TAMANIO];
+        inicializarTablero(letras);
+        inicializarAdyacencias();
     }
 
-    
-    
-    public int getNumVerts() {
-        return numVerts;
-    }
-
-    public void setNumVerts(int numVerts) {
-        this.numVerts = numVerts;
-    }
-
-    public int getMaxVerts() {
-        return MaxVerts;
-    }
-
-    public void setMaxVerts(int MaxVerts) {
-        this.MaxVerts = MaxVerts;
-    }
-
-    public Vertice[] getVerts() {
-        return verts;
-    }
-
-    public void setVerts(Vertice[] verts) {
-        this.verts = verts;
-    }
-
-    public int[][] getMatAd() {
-        return matAd;
-    }
-
-    public void setMatAd(int[][] matAd) {
-        this.matAd = matAd;
-    }
-    
-    public Grafo(int mx){
-        matAd = new int[mx][mx];
-        verts = new Vertice[mx];
-        for (int i = 0; i < mx; i++) {
-            for (int j = 0; i < mx; i++) {
-                matAd[i][j] = 0;
+    private void inicializarTablero(char[][] letras) {
+        for (int i = 0; i < TAMANIO; i++) {
+            for (int j = 0; j < TAMANIO; j++) {
+                tablero[i][j] = new Vertice(letras[i][j], i, j);
             }
         }
-        numVerts = 0;
-    }
-    
-    public void nuevoVertice(Vertice nom) {
-            Vertice v = new Vertice(nom.getLetra());
-            v.setNumVertice(numVerts);
-            verts[numVerts++] = v;
-            System.out.println("El vertil vertice ha sido agregado exitosamente.");
     }
 
-    public int numVertice(Vertice vs) {
-        Vertice v = new Vertice(vs.getLetra(), vs.getNumVertice());
-        boolean encontrado = false;
-        int i = 0;
-        for (; (i < numVerts) && !encontrado;) {
-            encontrado = verts[i].getLetra().equals(v.getLetra());
-            if (!encontrado) {
-                i++;
+    private void inicializarAdyacencias() {
+        for (int i = 0; i < TAMANIO; i++) {
+            for (int j = 0; j < TAMANIO; j++) {
+                conectarAdyacencias(i, j);
             }
         }
-        return (i < numVerts) ? i : -1;
     }
-    
-    public Vertice vertice(int posicion){
-        if(posicion <= this.getNumVerts()){
-            Vertice v = this.getVerts()[posicion];
-            return v;
+
+    private void conectarAdyacencias(int fila, int columna) {
+        int[][] direcciones = {
+            {-1, -1}, {-1, 0}, {-1, 1},
+            {0, -1}, {0, 1},
+            {1, -1}, {1, 0}, {1, 1}
+        };
+
+        int indiceActual = fila * TAMANIO + columna;
+        for (int[] dir : direcciones) {
+            int nuevaFila = fila + dir[0];
+            int nuevaColumna = columna + dir[1];
+            if (esValido(nuevaFila, nuevaColumna)) {
+                int indiceAdyacente = nuevaFila * TAMANIO + nuevaColumna;
+                adyacencia[indiceActual][indiceAdyacente] = true;
+                adyacencia[indiceAdyacente][indiceActual] = true;
+            }
+        }
+    }
+
+    private boolean esValido(int fila, int columna) {
+        return fila >= 0 && fila < TAMANIO && columna >= 0 && columna < TAMANIO;
+    }
+
+    public ListaSimple obtenerAdyacentes(Vertice nodo) {
+        ListaSimple adyacentes = new ListaSimple();
+        int indiceNodo = nodo.getFila() * TAMANIO + nodo.getColumna();
+        for (int i = 0; i < TAMANIO * TAMANIO; i++) {
+            if (adyacencia[indiceNodo][i]) {
+                int fila = i / TAMANIO;
+                int columna = i % TAMANIO;
+                adyacentes.InsertarFinal(tablero[fila][columna]);
+            }
+        }
+        return adyacentes;
+    }
+
+    public Vertice getNodo(int fila, int columna) {
+        if (esValido(fila, columna)) {
+            return tablero[fila][columna];
         }
         return null;
     }
-    
-    public String nombreVertice(Vertice vs) {
-        //Vertice v = new Vertice(vs.getLetra(), vs.getNumVertice());
-        boolean encontrado = false;
-        int i = 0;
-        for (; (i < numVerts) && !encontrado;) {
-            encontrado = verts[i].getLetra().equals(vs.getLetra());
-            if (!encontrado) {
-                i++;
-            }
-        }
-        return (i < numVerts) ? vs.getLetra(): null;
-    }
-    
-    public int nuevoArco(Vertice a, Vertice b, int peso){
-        int va,vb;
-        va  = numVertice(a);
-        vb = numVertice(b);
-        if (va  < 0 || vb < 0) {
-            return -1;
-        }
-        matAd[va][vb] = peso;
-        matAd[vb][va] = peso;
-        return peso;
-    }
-    
-    public boolean adyacente(Vertice a, Vertice b) throws Exception {
-        int va,vb;
-        va  = numVertice(a);
-        vb = numVertice(b);
-        if (va < 0 || vb < 0) throw new Exception ("Vértice no existe");
-        return matAd[va][vb] != 0;
-    }
-      
-    //Metodo para obtener los vertices que no han sido visitado
-    public int VerticesNoVisitados(int vert){
-        
-        for (int j = 0; j < getNumVerts(); j++) {
-            if(matAd[vert][j]!=0 && !verts[j].isFueVisitado()){
-                return j;
-            }  
-        }
-        return -1;
-    }
-    // Implementación de DFS para buscar una palabra en el grafo
-    public boolean DFS(String word) {
-        boolean[] visited = new boolean[numVerts];
-        MyStack stack = new MyStack();
 
-        for (int i = 0; i < numVerts; i++) {
-            if (verts[i].getLetra().equals(word)) {
-                return true;
+    public void mostrarTablero() {
+        for (int i = 0; i < TAMANIO; i++) {
+            for (int j = 0; j < TAMANIO; j++) {
+                System.out.print(tablero[i][j].getLetra() + " ");
             }
-            if (!visited[i]) {
-                stack.apilar(verts[i]);
-                while (!stack.isEmpty()) {
-                    Vertice v = (Vertice) stack.desapilar();
-                    int vIndex = numVertice(v);
-                    if (!visited[vIndex]) {
-                        visited[vIndex] = true;
-                        if (v.getLetra().equals(word)) {
-                            return true;
-                        }
-                        for (int j = 0; j < numVerts; j++) {
-                            if (matAd[vIndex][j] != 0 && !visited[j]) {
-                                stack.apilar(verts[j]);
-                            }
-                        }
-                    }
-                }
-            }
+            System.out.println();
         }
-        return false;
-    }
 
-    // Implementación de BFS para buscar una palabra en el grafo
-    public boolean BFS(String word) {
-        boolean[] visited = new boolean[numVerts];
-        MyQueue queue = new MyQueue();
-
-        for (int i = 0; i < numVerts; i++) {
-            if (verts[i].getLetra().equals(word)) {
-                return true;
-            }
-            if (!visited[i]) {
-                queue.encolar(verts[i]);
-                while (!queue.isEmpty()) {
-                    Vertice v = (Vertice) queue.desencolar();
-                    int vIndex = numVertice(v);
-                    if (!visited[vIndex]) {
-                        visited[vIndex] = true;
-                        if (v.getLetra().equals(word)) {
-                            return true;
-                        }
-                        for (int j = 0; j < numVerts; j++) {
-                            if (matAd[vIndex][j] != 0 && !visited[j]) {
-                                queue.encolar(verts[j]);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
     }
 }

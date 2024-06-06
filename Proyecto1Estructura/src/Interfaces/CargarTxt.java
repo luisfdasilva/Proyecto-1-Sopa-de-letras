@@ -9,6 +9,7 @@ package Interfaces;
  * @author eliocolmenares
  */
 
+import Clases.SopaDeLetras;
 import EDD.Grafo;
 import EDD.ListaSimple;
 import Functions.FunctionTxt;
@@ -21,10 +22,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class CargarTxt extends javax.swing.JFrame {
 
-    public static ListaSimple diccionario = new ListaSimple();
-    public static Grafo grafo = new Grafo(16);
-    public CargarTxt() {
+     public static Bienvenida v1;
+     public static SopaDeLetras sopaDeLetras = new SopaDeLetras();
+     
+    public CargarTxt(Bienvenida v1) {
         initComponents();
+        this.v1 = v1;
+        v1.setVisible(false);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
@@ -146,9 +150,16 @@ public class CargarTxt extends javax.swing.JFrame {
     }//GEN-LAST:event_Buscar_ArchivoActionPerformed
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
-        String archivo = Archivo_Cargado.getText();
+       String archivo = Archivo_Cargado.getText();
         FunctionTxt func = new FunctionTxt();
-        func.leer(archivo, diccionario, grafo);
+
+        func.leerTXT(archivo, sopaDeLetras);
+//        Vertice nodo = new Vertice('C', 0, 0);
+//        sopaDeLetras.getGrafo().obtenerAdyacentes(nodo).mostrar();
+        
+        Menu v3 = new Menu(this);
+        this.setVisible(false);
+        v3.setVisible(true);
     }//GEN-LAST:event_cargarActionPerformed
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
@@ -187,7 +198,7 @@ public class CargarTxt extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CargarTxt().setVisible(true);
+                new CargarTxt(v1).setVisible(true);
             }
         });
     }
