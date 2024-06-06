@@ -19,7 +19,7 @@ public class main {
     public static void main(String[] args) {
         Bienvenida v1 = new Bienvenida();
         v1.setVisible(true);
-        CargarTxt v2 = new CargarTxt();
+       
         
     }
     
