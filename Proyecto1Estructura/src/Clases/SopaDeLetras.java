@@ -9,8 +9,7 @@ import Functions.BusquedaBFS;
 import Functions.BusquedaDFS;
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares
  */
 public class SopaDeLetras {
     private Grafo grafo;

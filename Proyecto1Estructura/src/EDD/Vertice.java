@@ -5,8 +5,7 @@
 package EDD;
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares
  */
 public class Vertice {
      private char letra;

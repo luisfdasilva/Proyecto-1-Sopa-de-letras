@@ -7,8 +7,7 @@ package Interfaces;
 import static Interfaces.CargarTxt.sopaDeLetras;
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares
  */
 public class BuscarPalabras extends javax.swing.JFrame {
 

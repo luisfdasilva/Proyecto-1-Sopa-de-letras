@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package EDD;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares, luisfdasilva
  */
 public class Grafo {
     private Vertice[][] tablero;
@@ -88,4 +89,66 @@ public class Grafo {
         }
 
     }
+    public void mostrarTableroGraphStream() {
+
+        GrafoGraphStream grafo = new GrafoGraphStream();
+
+
+        for (int i = 0; i < TAMANIO; i++) {
+
+            for (int j = 0; j < TAMANIO; j++) {
+
+                Vertice nodo = tablero[i][j];
+
+                grafo.addNode(String.valueOf(nodo.getLetra()), String.valueOf(nodo.getLetra()));
+
+
+                ListaSimple adyacentes = obtenerAdyacentes(nodo);
+
+                for (int k = 0; k < adyacentes.getSize(); k++) {
+
+                    Object objeto = adyacentes.getValor(k);
+
+                    Vertice adyacente = (Vertice) objeto;
+
+                    grafo.addEdge(String.valueOf(nodo.getLetra()) + "-" + String.valueOf(adyacente.getLetra()), String.valueOf(nodo.getLetra()), String.valueOf(adyacente.getLetra()));
+
+                }
+
+            }
+
+        }
+
+
+        grafo.mostrarGrafo();
+
+    }
+//    public void mostrarGrafo() {
+//            Graph graph = new SingleGraph("Grafo");
+//
+//            // Añadir nodos al grafo
+//            for (int i = 0; i < TAMANIO; i++) {
+//                for (int j = 0; j < TAMANIO; j++) {
+//                    Vertice vertice = tablero[i][j];
+//                    Node node = graph.addNode(vertice.toString());
+//                    node.setAttribute("ui.label", vertice.getLetra());
+//                }
+//            }
+//
+//            // Añadir aristas al grafo
+//            for (int i = 0; i < TAMANIO * TAMANIO; i++) {
+//                for (int j = i + 1; j < TAMANIO * TAMANIO; j++) {
+//                    if (adyacencia[i][j]) {
+//                        Vertice v1 = tablero[i / TAMANIO][i % TAMANIO];
+//                        Vertice v2 = tablero[j / TAMANIO][j % TAMANIO];
+//                        graph.addEdge(v1.toString() + "-" + v2.toString(), v1.toString(), v2.toString());
+//                    }
+//                }
+//            }
+//
+//            // Configuración visual del grafo
+//            graph.setAttribute("ui.stylesheet", "node { fill-color: red; } node.marked { fill-color: green; }");
+//            graph.display();
+//        }
+
 }

@@ -7,8 +7,7 @@ package EDD;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares
  */
 public class ListaSimple {
     private Nodo pFirst; //nodo apuntador al primero

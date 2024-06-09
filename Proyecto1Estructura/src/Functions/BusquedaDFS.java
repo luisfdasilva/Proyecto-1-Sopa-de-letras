@@ -12,8 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares
  */
 public class BusquedaDFS {
      private Grafo grafo;

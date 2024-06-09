@@ -13,8 +13,7 @@ import EDD.Vertice;
 
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares
  */
 public class FunctionTxt {
 

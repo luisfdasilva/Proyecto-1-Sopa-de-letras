@@ -8,8 +8,7 @@ import Interfaces.CargarTxt;
  */
 
 /**
- *
- * @author luis
+ * * @author luisfdasilva
  */
 public class main {
 

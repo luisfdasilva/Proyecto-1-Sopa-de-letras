@@ -5,8 +5,7 @@
 package Interfaces;
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares
  */
 
 import Clases.SopaDeLetras;
@@ -152,7 +151,7 @@ public class CargarTxt extends javax.swing.JFrame {
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
        String archivo = Archivo_Cargado.getText();
         FunctionTxt func = new FunctionTxt();
-
+        
         func.leerTXT(archivo, sopaDeLetras);
 //        Vertice nodo = new Vertice('C', 0, 0);
 //        sopaDeLetras.getGrafo().obtenerAdyacentes(nodo).mostrar();

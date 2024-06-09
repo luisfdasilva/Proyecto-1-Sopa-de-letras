@@ -7,8 +7,7 @@ package Clases;
 import EDD.ListaSimple;
 
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares
  */
 public class Diccionario {
    private ListaSimple palabras;

@@ -5,8 +5,7 @@
 package EDD;
 
 /**
- *
- * @author luis
+ * *@author luisfdasilva
  */
 public class MyStack {
     private Nodo top;

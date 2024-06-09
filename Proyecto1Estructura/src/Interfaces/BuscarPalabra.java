@@ -3,15 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaces;
+import EDD.Grafo;
+import EDD.GrafoGraphStream;
+import EDD.Vertice;
 import static Interfaces.BuscarPalabras.v3;
 import static Interfaces.CargarTxt.sopaDeLetras;
+import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.stream.ProxyPipe;
+import org.graphstream.stream.Source;
+import org.graphstream.ui.graphicGraph.GraphicGraph;
+import org.graphstream.ui.swing_viewer.ViewPanel;
+import org.graphstream.ui.view.GraphRenderer;
+import org.graphstream.ui.view.Viewer;
 /**
- *
- * @author eliocolmenares
+ * * @author eliocolmenares, luisfdasilva
  */
 public class BuscarPalabra extends javax.swing.JFrame {
 
     public static Menu v4;
+    private Grafo grafo;
     
     public BuscarPalabra(Menu v4) {
         initComponents();
@@ -19,6 +35,7 @@ public class BuscarPalabra extends javax.swing.JFrame {
         v4.setVisible(false);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        
     }
 
     /**
@@ -63,6 +80,11 @@ public class BuscarPalabra extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 210, 150));
 
         mostrarBFS.setText("Mostrar Arbol BFS");
+        mostrarBFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarBFSActionPerformed(evt);
+            }
+        });
         jPanel1.add(mostrarBFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 210, -1));
 
         volver.setText("Volver");
@@ -101,6 +123,13 @@ public class BuscarPalabra extends javax.swing.JFrame {
         v4.setVisible(true);
     }//GEN-LAST:event_volverActionPerformed
 
+    private void mostrarBFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarBFSActionPerformed
+        // TODO add your handling code here:
+//        GrafoGraphStream grafo = new GrafoGraphStream();
+//
+//        grafo.mostrarTableroGraphStream();
+    }//GEN-LAST:event_mostrarBFSActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -131,7 +160,6 @@ public class BuscarPalabra extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuscarPalabra(v4).setVisible(true);
             }
         });
     }
